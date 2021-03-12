@@ -1,10 +1,11 @@
-package pl.redny.cqrs.domain;
+package pl.redny.cqrs;
 
 public interface Processor {
 
     ProcessorType getType();
 
-    public enum ProcessorType {
+    enum ProcessorType {
         PRE_PROCESSOR, POST_PROCESSOR, DUPLEX_PROCESSOR
     }
+    
 }

@@ -15,4 +15,5 @@ public class QueryException extends Exception {
     public QueryException(final Throwable cause) {
         super(cause);
     }
+
 }

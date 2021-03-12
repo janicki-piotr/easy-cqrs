@@ -15,4 +15,5 @@ public class CommandException extends Exception {
     public CommandException(final Throwable cause) {
         super(cause);
     }
+
 }

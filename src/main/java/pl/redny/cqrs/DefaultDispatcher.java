@@ -1,14 +1,14 @@
-package pl.redny.cqrs.domain;
+package pl.redny.cqrs;
 
 import io.vavr.control.Try;
-import pl.redny.cqrs.domain.command.Command;
-import pl.redny.cqrs.domain.command.CommandDispatcher;
-import pl.redny.cqrs.domain.command.CommandHandler;
-import pl.redny.cqrs.domain.command.CommandProcessor;
-import pl.redny.cqrs.domain.query.Query;
-import pl.redny.cqrs.domain.query.QueryDispatcher;
-import pl.redny.cqrs.domain.query.QueryHandler;
-import pl.redny.cqrs.domain.query.QueryProcessor;
+import pl.redny.cqrs.command.Command;
+import pl.redny.cqrs.command.CommandDispatcher;
+import pl.redny.cqrs.command.CommandHandler;
+import pl.redny.cqrs.command.CommandProcessor;
+import pl.redny.cqrs.query.Query;
+import pl.redny.cqrs.query.QueryDispatcher;
+import pl.redny.cqrs.query.QueryHandler;
+import pl.redny.cqrs.query.QueryProcessor;
 import pl.redny.cqrs.exception.CommandException;
 import pl.redny.cqrs.exception.QueryException;
 
@@ -45,7 +45,8 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
     private final List<QueryHandler<Query, ?>> queryHandlers = new ArrayList<>();
     private final List<Processor> processors = new ArrayList<>();
 
-    public DefaultDispatcher(final List<CommandHandler<Command>> commandHandlers, final List<QueryHandler<Query, ?>> queryHandlers) {
+    public DefaultDispatcher(final List<CommandHandler<Command>> commandHandlers,
+                             final List<QueryHandler<Query, ?>> queryHandlers) {
         if (commandHandlers != null) {
             this.commandHandlers.addAll(commandHandlers);
         }
@@ -54,7 +55,8 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
         }
     }
 
-    public DefaultDispatcher(final List<CommandHandler<Command>> commandHandlers, final List<QueryHandler<Query, ?>> queryHandlers,
+    public DefaultDispatcher(final List<CommandHandler<Command>> commandHandlers,
+                             final List<QueryHandler<Query, ?>> queryHandlers,
                              final List<Processor> processors) {
         this(commandHandlers, queryHandlers);
 
@@ -94,7 +96,8 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
         }
     }
 
-    private CommandHandler<Command> findCommandHandler(final Command command, final List<CommandHandler<Command>> commandHandlers) {
+    private CommandHandler<Command> findCommandHandler(final Command command,
+                                                       final List<CommandHandler<Command>> commandHandlers) {
         return commandHandlers.stream()
                 .filter(handler -> handler.canHandle(command))
                 .findFirst()
@@ -123,7 +126,7 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
     }
 
     private void processQueryProcessors(final Query query, final QueryHandler<Query, ?> queryHandler,
-                                          final io.vavr.collection.List<Processor> postProcessors) throws QueryException {
+                                        final io.vavr.collection.List<Processor> postProcessors) throws QueryException {
         for (Processor processor : postProcessors) {
             if (processor instanceof CommandProcessor) {
                 ((QueryProcessor) processor).process(queryHandler, query);
@@ -141,12 +144,15 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
     private io.vavr.collection.List<Processor> findPreProcessors(List<Processor> processors) {
         return io.vavr.collection.List.ofAll(processors.stream()
                 .filter(processor -> processor.getType() == Processor.ProcessorType.PRE_PROCESSOR
-                        || processor.getType() == Processor.ProcessorType.DUPLEX_PROCESSOR));
+                        || processor.getType() == Processor.ProcessorType.DUPLEX_PROCESSOR)
+        );
     }
 
     private io.vavr.collection.List<Processor> findPostProcessors(List<Processor> processors) {
         return io.vavr.collection.List.ofAll(processors.stream()
                 .filter(processor -> processor.getType() == Processor.ProcessorType.POST_PROCESSOR
-                        || processor.getType() == Processor.ProcessorType.DUPLEX_PROCESSOR));
+                        || processor.getType() == Processor.ProcessorType.DUPLEX_PROCESSOR)
+        );
     }
+
 }
