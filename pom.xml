@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>pl.redny</groupId>
-  <artifactId>cqrs</artifactId>
-  <version>v0.1.2-beta</version>
+  <artifactId>easy-cqrs</artifactId>
+  <version>v0.1.3-beta</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

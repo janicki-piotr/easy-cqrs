@@ -1,6 +1,6 @@
-package pl.redny.cqrs.domain.query;
+package pl.redny.cqrs.query;
 
-import pl.redny.cqrs.domain.Processor;
+import pl.redny.cqrs.Processor;
 import pl.redny.cqrs.exception.QueryException;
 
 public interface QueryProcessor extends Processor {

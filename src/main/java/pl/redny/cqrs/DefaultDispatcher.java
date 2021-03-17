@@ -1,14 +1,14 @@
-package pl.redny.cqrs.domain;
+package pl.redny.cqrs;
 
 import io.vavr.control.Try;
-import pl.redny.cqrs.domain.command.Command;
-import pl.redny.cqrs.domain.command.CommandDispatcher;
-import pl.redny.cqrs.domain.command.CommandHandler;
-import pl.redny.cqrs.domain.command.CommandProcessor;
-import pl.redny.cqrs.domain.query.Query;
-import pl.redny.cqrs.domain.query.QueryDispatcher;
-import pl.redny.cqrs.domain.query.QueryHandler;
-import pl.redny.cqrs.domain.query.QueryProcessor;
+import pl.redny.cqrs.command.Command;
+import pl.redny.cqrs.command.CommandDispatcher;
+import pl.redny.cqrs.command.CommandHandler;
+import pl.redny.cqrs.command.CommandProcessor;
+import pl.redny.cqrs.query.Query;
+import pl.redny.cqrs.query.QueryDispatcher;
+import pl.redny.cqrs.query.QueryHandler;
+import pl.redny.cqrs.query.QueryProcessor;
 import pl.redny.cqrs.exception.CommandException;
 import pl.redny.cqrs.exception.QueryException;
 

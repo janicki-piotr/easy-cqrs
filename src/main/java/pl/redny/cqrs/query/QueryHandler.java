@@ -1,4 +1,4 @@
-package pl.redny.cqrs.domain.query;
+package pl.redny.cqrs.query;
 
 
 import io.vavr.control.Try;

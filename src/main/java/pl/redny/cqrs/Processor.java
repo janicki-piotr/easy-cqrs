@@ -1,4 +1,4 @@
-package pl.redny.cqrs.domain;
+package pl.redny.cqrs;
 
 public interface Processor {
 

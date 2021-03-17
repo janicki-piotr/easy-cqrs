@@ -1,6 +1,6 @@
-package pl.redny.cqrs.domain.command;
+package pl.redny.cqrs.command;
 
-import pl.redny.cqrs.domain.Processor;
+import pl.redny.cqrs.Processor;
 import pl.redny.cqrs.exception.CommandException;
 
 public interface CommandProcessor  extends Processor {

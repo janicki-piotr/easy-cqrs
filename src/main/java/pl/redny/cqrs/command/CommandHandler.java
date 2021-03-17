@@ -1,4 +1,4 @@
-package pl.redny.cqrs.domain.command;
+package pl.redny.cqrs.command;
 
 import pl.redny.cqrs.exception.CommandException;
 
