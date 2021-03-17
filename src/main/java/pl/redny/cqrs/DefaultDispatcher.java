@@ -19,7 +19,7 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
 
     private static final CommandHandler<Command> DEFAULT_COMMAND_HANDLER = new CommandHandler<Command>() {
         @Override
-        public void execute(final Command command) throws CommandException {
+        public Try<Void> execute(final Command command) throws CommandException {
             throw new CommandException("No command handler implementations for " + command);
         }
 
@@ -74,15 +74,15 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
         try {
             processCommandProcessors(command, commandHandler, findPreProcessors(processors));
 
-            commandHandler.execute(command);
+            final Try<Void> result = commandHandler.execute(command);
 
             processCommandProcessors(command, commandHandler, findPostProcessors(processors));
+
+            return result;
 
         } catch (CommandException e) {
             return Try.failure(e);
         }
-
-        return Try.success(null);
     }
 
     private void processCommandProcessors(final Command command, final CommandHandler<Command> commandHandler,
