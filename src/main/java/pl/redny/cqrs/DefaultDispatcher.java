@@ -125,7 +125,7 @@ public class DefaultDispatcher implements CommandDispatcher, QueryDispatcher {
     private void processQueryProcessors(final Query query, final QueryHandler<Query, ?> queryHandler,
                                           final io.vavr.collection.List<Processor> postProcessors) throws QueryException {
         for (Processor processor : postProcessors) {
-            if (processor instanceof CommandProcessor) {
+            if (processor instanceof QueryProcessor) {
                 ((QueryProcessor) processor).process(queryHandler, query);
             }
         }
